@@ -17,14 +17,15 @@ export const login = (email, password) => {
 };
 
 export const logout = () => {
-  return fetch(_apiUrl + "/logout");
+  return fetch(`${_apiUrl}/logout`);
 };
 
 export const tryGetLoggedInUser = () => {
-  return fetch(_apiUrl + "/me").then((res) => {
+  return fetch(_apiUrl + "/Me").then((res) => {
     return res.status === 401 ? Promise.resolve(null) : res.json();
   });
 };
+
 
 export const register = (userProfile) => {
   userProfile.password = btoa(userProfile.password);

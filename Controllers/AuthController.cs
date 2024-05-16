@@ -119,6 +119,8 @@ public class AuthController : ControllerBase
         return NotFound();
     }
 
+
+
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegistrationDTO registration)
     {
@@ -128,9 +130,11 @@ public class AuthController : ControllerBase
             Email = registration.Email
         };
 
-        var password = Encoding
-            .GetEncoding("iso-8859-1")
-            .GetString(Convert.FromBase64String(registration.Password));
+     var password = Encoding.UTF8.GetString(Convert.FromBase64String(registration.Password));
+
+        //var password = Encoding
+        //    .GetEncoding("iso-8859-1")
+        //    .GetString(Convert.FromBase64String(registration.Password));
 
         var result = await _userManager.CreateAsync(user, password);
         if (result.Succeeded)
